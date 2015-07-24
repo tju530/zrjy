@@ -2,7 +2,6 @@ package org.zr;
 
 import java.net.*;
 import java.io.*;
-import java.util.Arrays;
 
 public class ServerThread  implements Runnable	{
 	private Socket socket = null;
