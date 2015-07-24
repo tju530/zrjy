@@ -22,14 +22,17 @@ public class ClientThread implements Runnable {
         }
         catch(IOException e)    {
             e.printStackTrace();
+            System.exit(0);
         }
         finally {
             try{
                 if(bufReader != null)
                     bufReader.close();
+                System.exit(0);
             }
             catch(IOException e){
                 e.printStackTrace();
+                System.exit(0);
             }
         }
     }

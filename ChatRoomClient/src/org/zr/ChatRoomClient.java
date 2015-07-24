@@ -24,7 +24,10 @@ public class ChatRoomClient {
 
 
     public ChatRoomClient() throws  IOException {
-        this.socket = new Socket("127.0.0.1",PORT);
+        String tips = "";
+        String ip = JOptionPane.showInputDialog(tips + "input the server IP");
+        String port = JOptionPane.showInputDialog(tips + "input the PORT");
+        this.socket = new Socket(ip, Integer.valueOf(port));
         this.printStream = new PrintStream(socket.getOutputStream());
         this.bufReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.keyIn = new Scanner(System.in);
@@ -62,6 +65,10 @@ public class ChatRoomClient {
     public void readAndSend(){
         while(keyIn.hasNextLine()) {
             String msg = keyIn.nextLine();
+            if(msg.equals("")) {
+                System.out.println("The Content Cannot be Null !");
+                continue;
+            }
             //private communicate
             if(msg.indexOf(":")>0 && msg.startsWith("//"))  {
                 String userName = msg.substring(2).split(":")[0];
@@ -86,6 +93,7 @@ public class ChatRoomClient {
                 bufReader.close();
             if( !socket.isClosed())
                 socket.close();
+            System.exit(0);
         }
         catch (IOException e)   {
             e.printStackTrace();
